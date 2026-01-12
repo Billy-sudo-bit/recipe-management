@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { supabase } from "../../supabase"
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate()
 
   const [email, setEmail] = useState("")
@@ -10,12 +10,12 @@ export default function Login() {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
     })
@@ -23,7 +23,8 @@ export default function Login() {
     if (error) {
       setError(error.message)
     } else {
-      navigate("/admin/recipes")
+      alert("Admin account created. You can now log in.")
+      navigate("/admin/login")
     }
 
     setLoading(false)
@@ -34,7 +35,7 @@ export default function Login() {
       <div className="bg-gray-800 p-8 rounded-lg w-full max-w-md">
 
         <h1 className="text-2xl font-bold mb-6 text-center">
-          Admin Login
+          Admin Register
         </h1>
 
         {error && (
@@ -43,10 +44,10 @@ export default function Login() {
           </p>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleRegister} className="space-y-4">
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Admin Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -55,7 +56,7 @@ export default function Login() {
 
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Password (min 6 chars)"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -65,26 +66,18 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded font-semibold"
+            className="w-full bg-green-600 hover:bg-green-700 py-2 rounded font-semibold"
           >
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Creating..." : "Create Admin"}
           </button>
         </form>
 
-        {/* Links UNDER the form */}
-        <div className="mt-6 flex justify-between text-sm text-gray-400">
+        <div className="mt-6 text-center text-sm text-gray-400">
           <button
-            onClick={() => navigate("/recipes")}
+            onClick={() => navigate("/admin/login")}
             className="hover:text-white"
           >
-            ← Back to Recipes
-          </button>
-
-          <button
-            onClick={() => navigate("/admin/register")}
-            className="hover:text-white"
-          >
-            Create Admin Account
+            ← Back to Login
           </button>
         </div>
       </div>

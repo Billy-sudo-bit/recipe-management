@@ -6,6 +6,10 @@ import AdminRecipes from "./pages/admin/Recipes"
 import AddRecipe from "./pages/admin/AddRecipe"
 import EditRecipe from "./pages/admin/EditRecipe"
 import ProtectedRoute from "./components/ProtectedRoute"
+import Register from "./pages/admin/Register"
+import About from "./pages/About"
+import Services from "./pages/Services"
+import Contact from "./pages/Contact"
 
 function App() {
   return (
@@ -17,6 +21,11 @@ function App() {
 
       {/* Admin login */}
       <Route path="/admin/login" element={<Login />} />
+      <Route path="/admin/register" element={<Register />} />
+
+      <Route path="/about" element={<About />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/contact" element={<Contact />} />
 
       {/* Admin = Manage Recipes */}
       <Route

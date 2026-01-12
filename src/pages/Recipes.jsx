@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "../supabase"
 import { CATEGORIES } from "../constants/categories"
 import { useNavigate } from "react-router-dom"
+import UserNavbar from "../components/UserNavbar"
 
 function Recipes() {
   const [recipes, setRecipes] = useState([])
@@ -30,7 +31,9 @@ function Recipes() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white px-6 py-10">
+      <UserNavbar />
       <div className="max-w-6xl mx-auto">
+        
         {/* Header */}
         <h1 className="text-4xl font-bold mb-6">🍽 Recipes</h1>
 
